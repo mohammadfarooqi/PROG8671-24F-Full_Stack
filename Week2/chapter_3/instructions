@@ -1,0 +1,7 @@
+Download the template from: https://startbootstrap.com/theme/clean-blog
+Or look in this folder for the ziped version of the original project.
+
+Notes:
+
+- On page 38 of the book, it says to move css, img, js and vender folders to the public folder. There is no longer a vender folder in the startup project that we download, the builder has updated code to import bootstrap js files from CDN and has added the css into css/style.css. In short, do not worry if you do not have the vender folder. Also, there is an additional folder that you need to move which is the assets folder that is not mentioned in the book, but is part of the startup project we downloaded.
+-
