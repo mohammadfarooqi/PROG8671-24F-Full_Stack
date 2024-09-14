@@ -1,3 +1,3 @@
-# PROG8671-24F-Sec2-FullStack-Programming
+# PROG8671-24F-FullStack-Programming
 
 Weekly examples
