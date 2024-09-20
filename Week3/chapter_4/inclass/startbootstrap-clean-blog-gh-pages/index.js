@@ -4,9 +4,13 @@ const ejs = require('ejs');
 
 const app = new express();
 
+app.use(express.static('public'));
+
 app.set('view engine', 'ejs');
 
-app.use(express.static('public'));
+app.listen(4000, () => {
+  console.log('App listening on port 4000');
+});
 
 app.get('/', (req, res) => {
   // res.sendFile(path.resolve(__dirname, 'pages/index.html'));
@@ -26,8 +30,4 @@ app.get('/contact', (req, res) => {
 app.get('/post', (req, res) => {
   // res.sendFile(path.resolve(__dirname, 'pages/post.html'));
   res.render('post');
-});
-
-app.listen(4000, () => {
-  console.log('App listening on port 4000');
 });
