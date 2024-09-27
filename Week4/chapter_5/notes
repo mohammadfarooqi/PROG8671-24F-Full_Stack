@@ -1,0 +1,16 @@
+install mondodb locally
+
+- we want to install `mongodb-community@4.4`
+  - note book says 4.0, but we can use 4.4
+- mac: https://www.prisma.io/dataguide/mongodb/setting-up-a-local-mongodb-database#setting-up-mongodb-on-macos
+  - on mac to start mongo server if you're on apple sillicon chip
+    - mongod --config /opt/homebrew/etc/mongod.conf
+- windows: https://www.prisma.io/dataguide/mongodb/setting-up-a-local-mongodb-database#setting-up-mongodb-on-windows
+
+install mongo compass
+
+- https://www.mongodb.com/download-center/compass
+
+when running test.js
+
+- note that the book uses mongoose version older than 6.0, where as the second argument to Model.create(obj, callback), it used to take a callback. But now in the Mongoose versions 6 and later (currently at 8.x), Mongoose's Model.create() returns a Promise.
