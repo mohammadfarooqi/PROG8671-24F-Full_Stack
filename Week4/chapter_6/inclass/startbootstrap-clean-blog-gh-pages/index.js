@@ -4,7 +4,7 @@ const BlogPost = require('./models/BlogPost.js');
 const mongoose = require('mongoose');
 
 mongoose.connect(
-  'mongodb+srv://mohammadfarooqi:<pass>@cluster0.7mpyoua.mongodb.net/my_database?retryWrites=true&w=majority&appName=Cluster0',
+  'mongodb+srv://<user>:<pass>@<domain>/my_database?retryWrites=true&w=majority&appName=Cluster0',
   { useNewUrlParser: true }
 );
 

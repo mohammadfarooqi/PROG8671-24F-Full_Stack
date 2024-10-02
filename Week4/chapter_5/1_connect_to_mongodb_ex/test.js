@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 const BlogPost = require('./models/BlogPost');
 
-mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true });
+mongoose.connect(
+  'mongodb+srv://<user>:<pass>@<domain>/my_database?retryWrites=true&w=majority&appName=Cluster0',
+  { useNewUrlParser: true }
+);
 
 /*
   (error, blogpost) => {
@@ -62,7 +65,7 @@ mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true });
 //   });
 
 // 5. get single database documents, i.e. to retrieve single documents with unique id _id
-// BlogPost.findById('66f6b503d0357964d865f4d9')
+// BlogPost.findById('66f83d53417553b2eb5c06f7')
 //   .then((blogpost) => {
 //     console.log(blogpost);
 //   })
@@ -76,7 +79,7 @@ mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true });
 
 // 6. Update the record '65ac3f3d2c97eaab80c063f6' with title 'Updated title'
 // NOTE: the document it sends back is the copy of document before the update
-// BlogPost.findByIdAndUpdate('66f6b503d0357964d865f4d9', {
+// BlogPost.findByIdAndUpdate('66f83d53417553b2eb5c06f7', {
 //   title: 'Updated title 1',
 // })
 //   .then((blogpost) => {
@@ -88,8 +91,8 @@ mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true });
 
 // DELETE
 
-// 7. Delete the record '66f6b503d0357964d865f4d9' with title 'Updated title'
-// BlogPost.findByIdAndDelete('66f6b503d0357964d865f4d9')
+// 7. Delete the record '66f83d53417553b2eb5c06f7' with title 'Updated title'
+// BlogPost.findByIdAndDelete('66f83d53417553b2eb5c06f7')
 //   .then((blogpost) => {
 //     console.log(blogpost);
 //   })

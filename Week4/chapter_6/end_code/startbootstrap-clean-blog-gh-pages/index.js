@@ -16,10 +16,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // MongoDB connects to our my_database db locally
 // mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true });
-mongoose.connect(
-  'mongodb+srv://<username>:<password>@cluster0.7mpyoua.mongodb.net/my_database',
-  { useNewUrlParser: true }
-);
+mongoose.connect('mongodb+srv://<username>:<password>@<domain>/my_database', {
+  useNewUrlParser: true,
+});
 
 /*
 - express adds the .render() function to the res obj

@@ -1,23 +1,20 @@
 const express = require('express');
 const path = require('path');
+const BlogPost = require('./models/BlogPost.js');
+const mongoose = require('mongoose');
+
+mongoose.connect(
+  'mongodb+srv://<user>:<pass>@<domain>@<domain>/my_database?retryWrites=true&w=majority&appName=Cluster0',
+  { useNewUrlParser: true }
+);
 
 const app = new express();
 const ejs = require('ejs');
 
-const BlogPost = require('./models/BlogPost');
-
-const mongoose = require('mongoose');
-
-mongoose.connect('mongodb+srv://<username>:<password>@<domain>/test', {
-  useNewUrlParser: true,
-});
-
 app.set('view engine', 'ejs');
 
-app.use(express.json());
-app.use(express.urlencoded());
-
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
 /*
 - express adds the .render() function to the res obj
@@ -26,7 +23,6 @@ app.use(express.static('public'));
 
 app.get('/', async (req, res) => {
   // res.sendFile(path.resolve(__dirname, 'pages/index.html'));
-
   const blogposts = await BlogPost.find({});
 
   res.render('index', {
