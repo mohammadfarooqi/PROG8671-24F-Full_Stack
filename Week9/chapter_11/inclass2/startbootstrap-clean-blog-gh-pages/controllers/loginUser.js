@@ -15,6 +15,7 @@ module.exports = async (req, res) => {
         console.log('login pass accepted');
         // if passwords match
         // store user session, will talk about it later
+        req.session.userId = user._id;
         res.redirect('/');
       } else {
         console.log('login pass unaccepted');

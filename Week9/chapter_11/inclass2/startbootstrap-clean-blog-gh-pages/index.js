@@ -4,8 +4,8 @@ const app = new express();
 const ejs = require('ejs');
 
 const mongoose = require('mongoose');
-
 const fileUpload = require('express-fileupload');
+const expressSession = require('express-session');
 
 const newPostController = require('./controllers/newPost');
 const homeController = require('./controllers/home');
@@ -15,8 +15,11 @@ const newUserController = require('./controllers/newUser');
 const storeUserController = require('./controllers/storeUser');
 const loginController = require('./controllers/login');
 const loginUserController = require('./controllers/loginUser');
+const logoutController = require('./controllers/logout');
 
 const validateMiddleware = require('./middleware/validateMiddleware');
+const authMiddleware = require('./middleware/authMiddleware');
+const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticatedMiddleware');
 
 app.set('view engine', 'ejs');
 
@@ -27,28 +30,57 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(fileUpload());
 
+app.use(
+  expressSession({
+    secret: 'keyboard cat',
+  })
+);
+
+global.loggedIn = null;
+
+app.use('*', (req, res, next) => {
+  loggedIn = req.session.userId;
+  next();
+});
+
 // MongoDB connects to our my_database db locally
 // mongoose.connect('mongodb://localhost/my_database', { useNewUrlParser: true });
-mongoose.connect(
-  'mongodb+srv://<username>:<password>@cluster0.7mpyoua.mongodb.net/my_database',
-  { useNewUrlParser: true }
-);
+mongoose.connect('mongodb+srv://<user>:<pass>@<domain>/my_database', {
+  useNewUrlParser: true,
+});
 
 app.get('/', homeController);
 
 app.get('/post/:id', getPostController);
 
-app.get('/posts/new', newPostController);
+app.get('/posts/new', authMiddleware, newPostController);
 
-app.post('/posts/store', validateMiddleware, storePostController);
+app.post(
+  '/posts/store',
+  authMiddleware,
+  validateMiddleware,
+  storePostController
+);
 
-app.get('/auth/register', newUserController);
+app.get('/auth/register', redirectIfAuthenticatedMiddleware, newUserController);
 
-app.post('/users/register', storeUserController);
+app.post(
+  '/users/register',
+  redirectIfAuthenticatedMiddleware,
+  storeUserController
+);
 
-app.get('/auth/login', loginController);
+app.get('/auth/login', redirectIfAuthenticatedMiddleware, loginController);
 
-app.post('/users/login', loginUserController);
+app.post(
+  '/users/login',
+  redirectIfAuthenticatedMiddleware,
+  loginUserController
+);
+
+app.get('/auth/logout', logoutController);
+
+app.use((req, res) => res.render('notfound'));
 
 app.listen(4000, () => {
   console.log('App listening on port 4000');
