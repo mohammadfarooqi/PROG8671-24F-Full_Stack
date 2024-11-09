@@ -1,5 +1,5 @@
 {
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "workbench.colorTheme": "Default Light+",
   "window.zoomLevel": 2,
   "liveServer.settings.port": 5501
